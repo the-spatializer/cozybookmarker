@@ -27,8 +27,8 @@ This application also uses [Laragon][9] (a portable universal development enviro
 
 1. download the `CozyBookmarker.7z` file by clicking on `CozyBookmarker.7z` file, then clicking on the `View raw` or `Download` button
 2. no need to install, just extract the `CozyBookmarker.7z` file anywhere on your PC
-3. run the `laragon.exe` file, some window
-4. wait a while, some popup windows will appear, just click yes
+3. run the `laragon.exe` file
+4. wait a while, some popup windows from your PC system may appear, just click `yes`
 5. open your browser, write `cozybookmarker.test` in the address bar, press enter
 6. on the start page, click the button in the middle, enter your master password to start, click `ok`
 7. click the button in the middle again, enter your password that you entered earlier, click `ok`
