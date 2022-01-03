@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        <meta name="theme-color" content="#1D1D1D">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CozyBookmarker - Website Bookmarker</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/5c503e8b03.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet">
+        <link rel=icon href=/id-card-solid.svg>
+        <script>
+            //random character generator
+            function random_character_generator() {
+                var character = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890#$%&_\/";
+                var character_array = character.split("");
+                var randomized_array = [];
+                for (var i = 0;i < character_array.length;i++) {
+                    var random_number = Math.floor(Math.random() * (character_array.length - 0)) + 0;
+                    var random_element = character_array[random_number];
+                    randomized_array.push(random_element);
+                }
+                for (var j = 0;j < 18;j++) {
+                    randomized_array.pop();
+                }
+                var randomized_string = randomized_array.join("");
+                return randomized_string;
+            }
+            //-------------------------
+            
+            var style_container = $("<link>").attr("rel","stylesheet").attr("href", "/style.css?" + random_character_generator());
+            $("head").append(style_container);
+        </script>
+    </head>
+    <body>
+        <div class="modal fade" id="modal-initial">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold bg-primary text-dark">New Password:</span>
+                            </div>
+                            <input type="password" class="form-control" id="pwd-initial">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" id="show-password-initial" data-toggle="tooltip" data-placement="right" title="Show Password"><i id="show-password-initial-icon" class="fas fa-lock text-dark"></i></button>
+                                <button id="initial" type="button" class="btn btn-primary text-dark" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-initial-false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body d-flex justify-content-between align-items-center">
+                        <span class="font-weight-bold">Please enter the new password</span>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-start">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold bg-primary text-dark">Password:</span>
+                            </div>
+                            <input type="password" class="form-control" id="pwd">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" id="show-password-start" data-toggle="tooltip" data-placement="right" title="Show Password"><i id="show-password-start-icon" class="fas fa-lock text-dark"></i></button>
+                                <button id="start" type="button" class="btn btn-primary text-dark" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                        <div class="custom-control custom-checkbox pt-2">
+                            <input type="checkbox" class="custom-control-input" id="backup-approvement">
+                            <label class="custom-control-label" for="backup-approvement">Backup data as a .json file</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-start-false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body d-flex justify-content-between align-items-center">
+                        <span class="font-weight-bold">Please enter the correct password</span>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-change-password">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group pb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold bg-primary text-dark">Old Password:</span>
+                            </div>
+                            <input type="password" class="form-control" id="pwd-change-password-old">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" id="show-change-password-old" data-toggle="tooltip" data-placement="right" title="Show Password"><i id="show-change-password-old-icon" class="fas fa-lock text-dark"></i></button>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text font-weight-bold bg-primary text-dark">New Password:</span>
+                            </div>
+                            <input type="password" class="form-control" id="pwd-change-password-new">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" id="show-change-password-new" data-toggle="tooltip" data-placement="right" title="Show Password"><i id="show-change-password-new-icon" class="fas fa-lock text-dark"></i></button>
+                                <button id="change-password" type="button" class="btn btn-primary text-dark" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-change-password-empty">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body d-flex justify-content-between align-items-center">
+                        <span class="font-weight-bold">You don't have a password</span>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-change-password-false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body d-flex justify-content-between align-items-center">
+                        <span class="font-weight-bold">Old password doesn't match</span>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-tab-add">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold">Add New Account Tab</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 col-12">
+                            <div id="tab-icon" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-icons text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="fas fa-globe">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Icon" data-content="Icon of your account.<br/>We use <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> for icons.<br/><br/><strong>How to get <a href='https://fontawesome.com/' target='_blank'>Font Awesome Icon</a></strong>:<br/><ol><li>Go to <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> wesite.</li><li>Find the icon you want in the search bar.</li><li>In gallery view, select the icon you want, then click the icon.</li><li>On the new page that appears, look at the pattern like <strong>'fas fa-globe'</strong>, copy the <strong>'fas fa-globe'</strong> pattern without quotes, paste it into the icon column here.</li></ol>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="tab-name" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-fingerprint text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="devsoft">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" onclick="random_string_generator(this, 8, true)" data-toggle="tooltip" data-placement="right" title="Generate Random Identifier">
+                                        <i class="fas fa-random text-body" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Identifier" data-content="Unique identifier of your account tab.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="tab-title" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-font text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="Development Softwares">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Title" data-content="Title of your account tab.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="tab-add-name-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account tab identifier must be filled!</h5>
+                            <h5 id="tab-add-title-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account tab title must be filled!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="add_tab()">Add New Account Tab</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-tab-delete">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold">Delete Existing Account Tab</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 col-12">
+                            <div id="tab-title-delete" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-font text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="Development Softwares">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Title" data-content="Title of your account tab.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="tab-delete-title-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account tab title must be filled!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="delete_tab()">Delete Existing Account Tab</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-tab-edit">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold">Edit Existing Account Tab</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 col-12">
+                            <div id="tab-icon-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-icons text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="fas fa-globe">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Icon" data-content="Icon of your account.<br/>We use <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> for icons.<br/><br/><strong>How to get <a href='https://fontawesome.com/' target='_blank'>Font Awesome Icon</a></strong>:<br/><ol><li>Go to <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> wesite.</li><li>Find the icon you want in the search bar.</li><li>In gallery view, select the icon you want, then click the icon.</li><li>On the new page that appears, look at the pattern like <strong>'fas fa-globe'</strong>, copy the <strong>'fas fa-globe'</strong> pattern without quotes, paste it into the icon column here.</li></ol>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="tab-name-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-fingerprint text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="devsoft">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" onclick="random_string_generator(this, 8, true)" data-toggle="tooltip" data-placement="right" title="Generate Random Identifier">
+                                        <i class="fas fa-random text-body" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Identifier" data-content="Unique identifier of your account tab.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="tab-title-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-font text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="Development Softwares">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Tab Title" data-content="Title of your account tab.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="tab-edit-name-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account tab identifier must be filled!</h5>
+                            <h5 id="tab-edit-title-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account tab title must be filled!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="edit_tab()">Edit Existing Account Tab</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-add">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold">Add Account - <span id="title-target"></span></h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 col-12">
+                            <div id="account-icon" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-icons text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="fas fa-globe">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Icon" data-content="Icon of your account.<br/>We use <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> for icons.<br/><br/><strong>How to get <a href='https://fontawesome.com/' target='_blank'>Font Awesome Icon</a></strong>:<br/><ol><li>Go to <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> wesite.</li><li>Find the icon you want in the search bar.</li><li>In gallery view, select the icon you want, then click the icon.</li><li>On the new page that appears, look at the pattern like <strong>'fas fa-globe'</strong>, copy the <strong>'fas fa-globe'</strong> pattern without quotes, paste it into the icon column here.</li></ol>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-category" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-table text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="reference">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Category" data-content="Category of your account.<br/>Like reference, tools, help, data, video, third-party, etc.<br/><strong class='text-danger'>Use hypen (-) instead of space.</strong><br/><strong class='text-danger'>Must be filled.</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-name" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-font text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="Google">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Name" data-content="Website name of your account.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-address" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-globe text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="https://www.google.com/">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Address" data-content="Website address of your account.">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-username" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-user text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="username@mail.com">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Username" data-content="Username or email of your account.">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-password" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-key text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control text-body" placeholder="123abc">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" onclick="show_password(this)" data-toggle="tooltip" data-placement="right" title="Show Password">
+                                        <i class="fas fa-lock text-body" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="random_string_generator(this, 16, false)" data-toggle="tooltip" data-placement="right" title="Generate Random Password">
+                                        <i class="fas fa-random text-body" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Password" data-content="Password of your account.">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="add-category-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account Category must be filled!</h5>
+                            <h5 id="add-name-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account Name must be filled!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="add_account()">Add Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold">Delete Account - <span id="title-target-delete"></span></h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 col-12">
+                            <div id="account-name-delete" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-font text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="Google">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Name" data-content="Website name of your account.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="delete-name-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account Name must be filled!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="delete_account()">Delete Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-edit">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold">Edit Account - <span id="title-target-edit"></span></h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="py-3 col-12">
+                            <div id="account-icon-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-icons text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div><input type="text" class="form-control text-body" placeholder="fas fa-globe">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Icon" data-content="Icon of your account.<br/>We use <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> for icons.<br/><br/><strong>How to get <a href='https://fontawesome.com/' target='_blank'>Font Awesome Icon</a></strong>:<br/><ol><li>Go to <a href='https://fontawesome.com/' target='_blank'>Font Awesome</a> wesite.</li><li>Find the icon you want in the search bar.</li><li>In gallery view, select the icon you want, then click the icon.</li><li>On the new page that appears, look at the pattern like <strong>'fas fa-globe'</strong>, copy the <strong>'fas fa-globe'</strong> pattern without quotes, paste it into the icon column here.</li></ol>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-category-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-table text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="reference">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Category" data-content="Category of your account.<br/>Like reference, tools, help, data, video, third-party, etc.<br/><strong class='text-danger'>Use hypen (-) instead of space.</strong><br/><strong class='text-danger'>Must be filled.</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-name-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-font text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="Google">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Name" data-content="Website name of your account.<br/><strong class='text-danger'>Must be filled</strong>">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-address-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-globe text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="https://www.google.com/">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Address" data-content="Website address of your account.">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-username-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-user text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control text-body" placeholder="username@mail.com">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Username" data-content="Username or email of your account.">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="account-password-edit" class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary">
+                                        <i class="fas fa-key text-body" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control text-body" placeholder="123abc">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" onclick="show_password(this)" data-toggle="tooltip" data-placement="right" title="Show Password">
+                                        <i class="fas fa-lock text-body" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="random_string_generator(this, 16, false)" data-toggle="tooltip" data-placement="right" title="Generate Random Password">
+                                        <i class="fas fa-random text-body" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Account Password" data-content="Password of your account.">
+                                        <i class="fas fa-question text-body"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="edit-category-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account Category must be filled!</h5>
+                            <h5 id="edit-name-warning" class="pt-2" style="color: #FF0000;display: none;text-align: center;">Account Name must be filled!</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="edit_account()">Edit Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="position-fixed d-flex justify-content-center align-items-center h-100 w-100">
+            <button id="button-start" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="right" title="Login">
+                <i class="fas fa-power-off fa-2x text-light"></i>
+            </button>
+            <button id="button-change-password" class="btn btn-primary position-fixed" style="left: 10px;bottom: 10px;">Change Password</button>
+            <div class="d-none spinner-border text-primary position-fixed" style="right: 10px;bottom: 10px;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- full box top -->
+        <div class="container">
+            <div class="row">
+                <header id="header" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between flex-wrap bg-light text-dark position-fixed" style="top: 0;left: 0;right: 0;z-index: 5;">
+                    <h1 class="font-weight-bold pt-3 pb-2 px-2 text-nowrap"><i class="fas fa-id-card text-primary"></i> CozyBookmarker</h1>
+                    <div id="copyright" class="pt-3 pb-2 px-2">
+                        <p style="margin: 0;">&copy 2021.</p>
+                    </div>
+                </header>
+                <!-- contents top -->
+                <div id="contents" class="d-none col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bg-light">
+                    <button id="button-add-tab" class="btn btn-primary position-fixed" onclick="show_modal_tab_add()" data-toggle="tooltip" data-placement="top" title="Add New Account Tab" style="bottom: 10px;right: 180px;z-index: 10;">
+                        <i class="fas fa-user-plus text-dark"></i>
+                    </button>
+                    <button id="button-delete-tab" class="btn btn-primary position-fixed" onclick="show_modal_tab_delete()" data-toggle="tooltip" data-placement="top" title="Delete Existing Account Tab" style="bottom: 10px;right: 130px;z-index: 10;">
+                        <i class="fas fa-user-minus text-dark"></i>
+                    </button>
+                    <button id="button-delete-tab" class="btn btn-primary position-fixed" onclick="show_modal_tab_edit()" data-toggle="tooltip" data-placement="top" title="Delete Existing Account Tab" style="bottom: 10px;right: 80px;z-index: 10;">
+                        <i class="fas fa-user-edit text-dark"></i>
+                    </button>
+                    <button id="button-off" class="btn btn-secondary position-fixed" data-toggle="tooltip" data-placement="top" title="Logout" style="bottom: 10px;right: 10px;z-index: 10;">
+                        <i class="fas fa-power-off fa-2x text-light"></i>
+                    </button>
+                    <!-- Nav tabs -->
+                    <ul id="tab-button" class="nav nav-tabs" role="tablist">
+                        <!--tab button will be here-->
+                    </ul>
+                    <!-- Tab panes -->
+                    <div id="tab-container" class="tab-content">
+                        <!--tab-container will be here-->
+                    </div>
+                </div>
+                <!-- contents bottom -->
+            </div>
+        </div>
+        <!-- full box bottom -->
+        <script>
+            //random character generator
+            function random_character_generator() {
+                var character = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890#$%&_\/";
+                var character_array = character.split("");
+                var randomized_array = [];
+                for (var i = 0;i < character_array.length;i++) {
+                    var random_number = Math.floor(Math.random() * (character_array.length - 0)) + 0;
+                    var random_element = character_array[random_number];
+                    randomized_array.push(random_element);
+                }
+                for (var j = 0;j < 18;j++) {
+                    randomized_array.pop();
+                }
+                var randomized_string = randomized_array.join("");
+                return randomized_string;
+            }
+            //-------------------------
+            
+            var script_container = $("<script>").attr("src", "/script.js?" + random_character_generator());
+            $("body").append(script_container);
+        </script>
+    </body>
+</html>
