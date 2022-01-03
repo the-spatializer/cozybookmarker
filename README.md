@@ -16,6 +16,12 @@ This application also uses [Laragon][9] (a portable universal development enviro
 7. Go to the website related to your account with just one click
 8. Can directly `copy`-`paste` information related to your account (username and password) to the related website with just two clicks
 
+## System Requirement
+
+1. [Google Chrome][10] Browser (is preferred, but you can use another browser)
+2. Fast Internet Connection
+3. [Laragon][9] (included in the `CozyBookmarker.7z`)
+
 [1]: https://www.w3schools.com/html/ "HTML"
 [2]: https://www.w3schools.com/css/ "CSS"
 [3]: https://getbootstrap.com/docs/4.6/getting-started/introduction/ "Bootstrap"
@@ -25,3 +31,4 @@ This application also uses [Laragon][9] (a portable universal development enviro
 [7]: https://www.php.net/ "PHP"
 [8]: https://www.mysql.com/ "MySQL"
 [9]: https://laragon.org/ "Laragon"
+[10]: https://www.google.com/chrome/ "Google Chrome"
