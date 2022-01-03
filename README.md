@@ -10,7 +10,7 @@ This application also uses [Laragon][9] (a portable universal development enviro
 1. Save your account (username, password, related websites) from various websites
 2. Generate a random password for your account
 3. Account setup by category and subcategory
-4. Can backup your account into a .json file
+4. Can backup your account into a `.json` file
 5. Add icons to each account according to your wishes
 6. Hosted locally on your PC, so you don't have to worry about theft of account data by outsiders
 7. Go to the website related to your account with just one click
