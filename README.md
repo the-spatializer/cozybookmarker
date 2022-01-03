@@ -29,7 +29,7 @@ This application also uses [Laragon][9] (a portable universal development enviro
 2. no need to install, just extract the `CozyBookmarker.7z` file anywhere on your PC
 3. run the `laragon.exe` file
 4. wait a while, some popup windows from your PC system may appear, just click `yes`
-5. open your browser, write `cozybookmarker.test` in the address bar, press enter
+5. open your browser, write `cozybookmarker.test` in the address bar, press `enter`
 6. on the start page, click the button in the middle, enter your master password to start, click `ok`
 7. click the button in the middle again, enter your password that you entered earlier, click `ok`
 8. the application can be used, please start entering your account into the application with cozy
