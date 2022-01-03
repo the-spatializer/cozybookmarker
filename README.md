@@ -34,6 +34,10 @@ This application also uses [Laragon][9] (a portable universal development enviro
 7. click the button in the middle again, enter your password that you entered earlier, click `ok`
 8. the application can be used, please start entering your account into the application with cozy
 
+## Troubleshooting
+
+If you experience an error when running the laragon.exe file, there may be a problem with the Visual C++ Redistributable on your PC, please go to the `/CozyBookmarker/tmp/ `folder, install the `vc_redist.x64.2013`, `vc_redist.x64.2017` or `vc_redist.x64.2019` file, one of those files will fix your error, try one by one. If it's still an error then you can search for it on [Google][11], this is related to [Laragon][9] and your PC compatibility issues, not problems that arise in CozyBookmarker.
+
 [1]: https://www.w3schools.com/html/ "HTML"
 [2]: https://www.w3schools.com/css/ "CSS"
 [3]: https://getbootstrap.com/docs/4.6/getting-started/introduction/ "Bootstrap"
@@ -44,3 +48,4 @@ This application also uses [Laragon][9] (a portable universal development enviro
 [8]: https://www.mysql.com/ "MySQL"
 [9]: https://laragon.org/ "Laragon"
 [10]: https://www.google.com/chrome/ "Google Chrome"
+[11]: https://www.google.com/ "Google"
