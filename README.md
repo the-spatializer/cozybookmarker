@@ -36,7 +36,7 @@ This application also uses [Laragon][9] (a portable universal development enviro
 
 ## Troubleshooting
 
-If you experience an error when running the laragon.exe file, there may be a problem with the Visual C++ Redistributable on your PC, please go to the `/CozyBookmarker/tmp/ `folder, install the `vc_redist.x64.2013`, `vc_redist.x64.2017` or `vc_redist.x64.2019` file, one of those files will fix your error, try one by one. If it's still an error then you can search for it on [Google][11], this is related to [Laragon][9] and your PC compatibility issues, not problems that arise in CozyBookmarker.
+If you experience an error when running the laragon.exe file, there may be a problem with the Visual C++ Redistributable on your PC, please go to the `/CozyBookmarker/tmp/` folder, install the `vc_redist.x64.2013`, `vc_redist.x64.2017` or `vc_redist.x64.2019` file, one of those files will fix your error, try one by one. If it's still an error then you can search for it on [Google][11], this is related to [Laragon][9] and your PC compatibility issues, not problems that arise in CozyBookmarker.
 
 [1]: https://www.w3schools.com/html/ "HTML"
 [2]: https://www.w3schools.com/css/ "CSS"
