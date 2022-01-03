@@ -15,12 +15,24 @@ This application also uses [Laragon][9] (a portable universal development enviro
 6. Hosted locally on your PC, so you don't have to worry about theft of account data by outsiders
 7. Go to the website related to your account with just one click
 8. Can directly `copy`-`paste` information related to your account (username and password) to the related website with just two clicks
+9. There are tooltips and popovers on each of the existing buttons and input fields that will make your navigation easier
 
 ## System Requirement
 
 1. [Google Chrome][10] Browser (is preferred, but you can use another browser)
 2. Fast Internet Connection
 3. [Laragon][9] (included in the `CozyBookmarker.7z`)
+
+## How to Install
+
+1. download the `CozyBookmarker.7z` file by clicking on `CozyBookmarker.7z` file, then clicking on the `View raw` or `Download` button
+2. no need to install, just extract the `CozyBookmarker.7z` file anywhere on your PC
+3. run the `laragon.exe` file, some window
+4. wait a while, some popup windows will appear, just click yes
+5. open your browser, write `cozybookmarker.test` in the address bar, press enter
+6. on the start page, click the button in the middle, enter your master password to start, click `ok`
+7. click the button in the middle again, enter your password that you entered earlier, click `ok`
+8. the application can be used, please start entering your account into the application with cozy
 
 [1]: https://www.w3schools.com/html/ "HTML"
 [2]: https://www.w3schools.com/css/ "CSS"
